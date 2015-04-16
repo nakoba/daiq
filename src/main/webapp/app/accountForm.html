@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+<body style="padding-top: 50px;">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Daiq</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+    <h2>Register Account</h2>
+    <form>
+        <div class="form-group">
+            <label for="inputAccountId">Account Id</label>
+            <input type="text" class="form-control" id="inputAccountId" placeholder="Account Id">
+        </div>
+        <div class="form-group">
+            <label for="inputEmailAddress">Email Address</label>
+            <input type="text" class="form-control" id="inputEmailAddress" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="text" class="form-control" id="inputPassword" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="inputConfirmPassword">Confirm Name</label>
+            <input type="text" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password">
+        </div>
+        <div class="form-group">
+            <label for="inputFamilyName">Family Name</label>
+            <input type="text" class="form-control" id="inputFamilyName" placeholder="FamilyName">
+        </div>
+        <div class="form-group">
+            <label for="inputGivenName">Given Name</label>
+            <input type="text" class="form-control" id="inputGivenName" placeholder="Given Name">
+        </div>
+        <button id="register" class="btn btn-default">Register</button>
+    </form>
+    <hr/>
+    <div>
+        <p id="idMessage" class="bg-success"></p>
+    </div>
+
+</div><!-- /.container -->
+
+<script src="../js/vanilla.min.js"></script>
+<script src="../js/app.js"></script>
+<script>
+var model = {
+    accountId: '',
+    emailAddress: '',
+    password: '',
+    familyName: '',
+    givenName: '',
+    bind: function () {
+        this.accountId = document.getElementById('inputAccountId').value;
+        this.emailAddress = document.getElementById('inputEmailAddress').value;
+        this.password = document.getElementById('inputPassword').value;
+        this.familyName = document.getElementById('inputFamilyName').value;
+        this.givenName = document.getElementById('inputGivenName').value;
+        return this;
+    }
+};
+
+document.getElementById("register").onclick = function(e) {
+    ajax.post("/daiq/rest/account", model.bind(), function(r) {
+        document.getElementById('idMessage').innerHTML = "Success";
+    });
+	e.preventDefault();
+};
+</script>
+
+</body>
+</html>
